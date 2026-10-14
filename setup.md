@@ -70,14 +70,14 @@ conda activate dsai-m3
 
 ## 5. `.env` file — required on macOS
 
-On macOS the `dsai-m3` conda environment can link two copies of the OpenMP runtime (`libomp.dylib`), which crashes the kernel on `import torch`. Create a file named **`.env`** at the repo root with these four lines:
+On macOS the `dsai-m3` conda environment can link two copies of the OpenMP runtime (`libomp.dylib`), which crashes the kernel on `import torch`. Create a file named **`.env`** at the repo root with these two lines:
 
 ```
-OMP_NUM_THREADS=1
-MKL_NUM_THREADS=1
 TOKENIZERS_PARALLELISM=false
 KMP_DUPLICATE_LIB_OK=TRUE
 ```
+
+(Older versions of this guide also set `OMP_NUM_THREADS=1` and `MKL_NUM_THREADS=1`. Leave those out — capping PyTorch to one thread makes CPU-only machines much slower.)
 
 VS Code reads it automatically at kernel startup. **After creating or editing `.env`, restart the Jupyter kernel** (Restart button in the notebook toolbar) — it's only read at startup.
 

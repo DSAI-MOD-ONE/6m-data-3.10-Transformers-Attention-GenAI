@@ -292,7 +292,7 @@ footer .stamp{font-style:normal;font-weight:300}
       </div>
       <div class="byline">
         <div class="badge">SC</div>
-        <div><b>Sarah Chen</b><span class="label">Cust. Experience Analyst &middot; End of mid-year</span></div>
+        <div><b>Sarah Chen</b><span class="label">Cust. Experience Analyst &middot; Day 10</span></div>
       </div>
       <hr class="rule-dot"/>
       <div class="label" style="letter-spacing:.18em;font-style:italic;color:var(--ink-2)">Click a token. Watch attention pick its neighbours.</div>
@@ -342,25 +342,25 @@ footer .stamp{font-style:normal;font-weight:300}
     <div class="hall-col">
       <span class="hall-tag bad">&#10005; Raw prompt &middot; no grounding</span>
       <h3>The model <em>invents.</em></h3>
-<div class="prompt"><span class="role">user:</span> What summer dresses does NorthStar
-sell under £80?</div>
-      <div class="response">"NorthStar offers several great summer dresses under £80, including the <span class="fake">Bloom Sundress (£59)</span>, the <span class="fake">Coastline Maxi (£72)</span>, and the <span class="fake">Marigold Wrap (£68)</span>. All come in floral prints and are popular this season."</div>
-      <p class="hall-foot">Confident, fluent, completely false. None of those products exist in the catalogue. The model has no ground truth to reach for &mdash; so it fills the gap with a plausible average of what "a product list" looks like.</p>
+<div class="prompt"><span class="role">user:</span> I'm looking for a summer dress
+under £80. What does NorthStar have?</div>
+      <div class="response">"NorthStar has several stylish and affordable options that fit your criteria: &hellip; <span class="fake">Midi Dress</span>: &hellip; Prices vary from <span class="fake">around £40 to £70</span>. &hellip; <span class="fake">Dress</span>: &hellip; These usually start at <span class="fake">around £30 and go up to £60</span>."</div>
+      <p class="hall-foot">Real SmolLM2 output from NB 04 (abridged). Confident, fluent, completely ungrounded: NorthStar has no "Midi Dress" line, and those price ranges are invented. The model has no ground truth to reach for &mdash; so it fills the gap with a plausible average of what "a product list" looks like.</p>
     </div>
     <div class="hall-col">
       <span class="hall-tag good">&#10003; RAG &middot; grounded</span>
       <h3>The model <em>recommends.</em></h3>
-<div class="prompt"><span class="role">user:</span> Catalogue (top-5 by similarity):
-<span class="ret">• Lila Floral Frock         £64
-• Marina Wrap Sundress     £79
-• Coral Tie-Strap Gown     £88
-• Atlas Linen Wrap Dress   £52
-• Eden Cotton Wrap         £45</span>
+<div class="prompt"><span class="role">user:</span> Products (top-5, max £80):
+<span class="ret">• Sienna Bodycon Dress      £45
+• Marigold Shift Dress      £52
+• Holly Knit Jumper Dress   £72
+• Rose Puff Sleeve Top      £42
+• Cassia Maxi Gown          £65</span>
 
-Recommend a summer dress under £80
-using only these.</div>
-      <div class="response">"Three options under £80 from the catalogue: the <span class="real">Lila Floral Frock</span> (£64) for a daytime look, the <span class="real">Marina Wrap Sundress</span> (£79) for something more polished, or the lighter <span class="real">Atlas Linen Wrap Dress</span> (£52)."</div>
-      <p class="hall-foot">Same model, grounded in retrieved facts. Every product name and price came from the prompt. The LLM brings fluency and reasoning; retrieval brings facts and an audit trail.</p>
+Recommend at most two products
+from the list above.</div>
+      <div class="response">"NorthStar has several stylish options that fit your budget of £80 or less. The first is the <span class="real">Sienna Bodycon Dress</span> ($45) &hellip; The second is the <span class="real">Marigold Shift Dress</span> ($52) &hellip; Both dresses offer <span class="fake">a range of colors</span> suitable for any occasion."</div>
+      <p class="hall-foot">Same model, real NB 04 output (abridged). Both products are real, in budget and in the retrieved set &mdash; grounding fixed the <em>what</em>. Not quite the <em>how</em>: prices come back as $ instead of £, and "a range of colors" is in neither description. That's why step 05 below guards every answer. The LLM brings fluency; retrieval brings facts and an audit trail.</p>
     </div>
   </div>
 </section>
@@ -422,14 +422,14 @@ using only these.</div>
   </div>
 
   <div class="honest">
-    <div class="h-card"><div class="n">1</div><h4>Is <em>retrieval</em> right?</h4><p>The LLM can only recommend what retrieval surfaces. Evaluate retrieval on its own first &mdash; do the top-K rows contain the products a human would pick?</p><span class="ex bad">&#10005; "Generation looks fluent &mdash; ship."</span><span class="ex good">&#10003; "Top-5 contains the right product on 7/8 queries."</span></div>
+    <div class="h-card"><div class="n">1</div><h4>Is <em>retrieval</em> right?</h4><p>The LLM can only recommend what retrieval surfaces. Evaluate retrieval on its own first &mdash; do the top-K rows contain the products a human would pick?</p><span class="ex bad">&#10005; "Generation looks fluent &mdash; ship."</span><span class="ex good">&#10003; "Top-5 misses Lila Sundress on &lsquo;summer dress&rsquo; &mdash; fix retrieval first."</span></div>
     <div class="h-card"><div class="n">2</div><h4>Is the prompt <em>grounded</em>?</h4><p>System prompt must say: "recommend only from the products listed below; if nothing fits, say so." Add a safety check that flags any product name not in the retrieved set.</p><span class="ex bad">&#10005; "Be helpful and creative."</span><span class="ex good">&#10003; "Only from the list. Flag invented names."</span></div>
     <div class="h-card"><div class="n">3</div><h4>Eval set, not <em>demo</em>?</h4><p>20&ndash;50 (query &rarr; acceptable answer) pairs written before tuning. Measure on that set when you change the retriever, K, prompt, or model.</p><span class="ex bad">&#10005; "Demoed my own query &mdash; works!"</span><span class="ex good">&#10003; "50-pair eval; measured after each change."</span></div>
   </div>
 </section>
 
 <aside class="pull">
-  <blockquote>"Nine months ago, we asked you to read 10,000 reviews. Now we've got a churn model, a forecast, a photo tagger, a search bar that understands <em>blue summer dress</em>, and an assistant that recommends without making things up. I don't fully understand how it all works &mdash; but <em>you</em> do. That's the difference."</blockquote>
+  <blockquote>"On day one, we asked you to read 10,000 reviews. Now we've got a churn model, a forecast, a photo tagger, a search bar that understands <em>blue summer dress</em>, and an assistant that recommends without making things up. I don't fully understand how it all works &mdash; but <em>you</em> do. That's the difference."</blockquote>
   <cite>&mdash; Marcus &middot; after the shopping-assistant launch &middot; Sarah's chapter at NorthStar closes here</cite>
 </aside>
 
@@ -481,7 +481,7 @@ using only these.</div>
 
 <section class="closer">
   <h2>The foundations are <em>under you.</em></h2>
-  <p>Nine months ago Sarah opened a USB drive with 10,000 reviews. None of it was magic &mdash; every step had a name, a metric, and a baseline that had to lose for the model to win. The toolkit is now yours.</p>
+  <p>Ten lessons ago Sarah opened a USB drive with 10,000 reviews. None of it was magic &mdash; every step had a name, a metric, and a baseline that had to lose for the model to win. The toolkit is now yours.</p>
   <div class="mark">&mdash; end of M3 &middot;&middot;&middot; go build something.</div>
 </section>
 
@@ -494,12 +494,13 @@ using only these.</div>
 (function(){
   const sent = ['The','trophy','did','not','fit','the','suitcase','because','it','was','too','big'];
   const weights = {
-    'it':       [0.04,0.34,0.02,0.02,0.04,0.04,0.12,0.04,0.00,0.04,0.04,0.26],
-    'fit':      [0.04,0.16,0.04,0.04,0.00,0.04,0.20,0.04,0.06,0.04,0.04,0.30],
-    'too':      [0.02,0.06,0.02,0.04,0.10,0.02,0.04,0.02,0.10,0.04,0.00,0.54],
-    'big':      [0.02,0.30,0.02,0.02,0.06,0.04,0.18,0.02,0.10,0.06,0.18,0.00],
-    'trophy':   [0.16,0.00,0.04,0.02,0.04,0.06,0.10,0.04,0.16,0.04,0.04,0.30],
-    'suitcase': [0.06,0.10,0.02,0.02,0.04,0.16,0.00,0.02,0.18,0.04,0.04,0.32],
+    // Each row is a softmax output: it sums to 1, including a small weight on the token itself.
+    'it':       [0.04,0.34,0.02,0.02,0.04,0.04,0.08,0.04,0.04,0.04,0.04,0.26],
+    'fit':      [0.04,0.20,0.04,0.04,0.04,0.04,0.16,0.04,0.06,0.04,0.04,0.26],
+    'too':      [0.02,0.06,0.02,0.04,0.10,0.02,0.04,0.02,0.10,0.04,0.04,0.50],
+    'big':      [0.02,0.26,0.02,0.02,0.06,0.04,0.18,0.02,0.10,0.08,0.16,0.04],
+    'trophy':   [0.16,0.04,0.04,0.02,0.04,0.06,0.10,0.04,0.16,0.04,0.04,0.26],
+    'suitcase': [0.06,0.10,0.02,0.02,0.04,0.16,0.04,0.02,0.18,0.04,0.04,0.28],
   };
   const sentEl = document.getElementById('attnSent');
   const barsEl = document.getElementById('attnBars');

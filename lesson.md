@@ -1,6 +1,6 @@
 # Lesson — L10 Transformers, Attention & GenAI
 
-> **Chapter 10 of the NorthStar Retail story.** *Sarah Chen · Customer Experience Analyst · Day 11.*
+> **Chapter 10 of the NorthStar Retail story.** *Sarah Chen · Customer Experience Analyst · Day 10.*
 > The L09 catalogue search has shipped — customers can type "blue summer dress" and find one. Yesterday afternoon, Marcus walked over with one last brief: *"Can a customer ask 'I need a summer outfit for a beach holiday under £200' and get an actual product recommendation, in natural language, from our catalogue?"*
 > This is the closer. The answer is a transformer, an LLM, and the pattern that ties them to L09's embeddings — RAG.
 
@@ -137,6 +137,6 @@ L10 closes the module. Across ten lessons Sarah has built the toolkit a working 
 
 ---
 
-> *"Nine months ago, we asked you to read 10,000 reviews. Now we've got a churn model, a forecast, a photo tagger, a search bar that understands 'blue summer dress', and an assistant that recommends from the catalogue without making things up. I don't fully understand how it all works — but you do. That's the difference."* — Marcus, after the shopping-assistant launch.
+> *"On day one, we asked you to read 10,000 reviews. Now we've got a churn model, a forecast, a photo tagger, a search bar that understands 'blue summer dress', and an assistant that recommends from the catalogue without making things up. I don't fully understand how it all works — but you do. That's the difference."* — Marcus, after the shopping-assistant launch.
 >
 > Sarah's chapter at NorthStar closes here. Yours starts now — go build something.

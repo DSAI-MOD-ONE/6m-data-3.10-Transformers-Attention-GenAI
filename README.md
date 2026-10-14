@@ -34,7 +34,7 @@ This is the lesson that connects classical ML to GenAI. By the end of the day yo
 
 - Watch the [lesson intro video](https://youtu.be/dJ2zUsszac4) (~5 min)
 - Read [pre-class.md](pre-class.md)
-- Watch the linked 3Blue1Brown attention video
+- *(Optional)* Watch the [3Blue1Brown attention video](https://www.youtube.com/watch?v=eMlx5fFNoYc) (~25 min) — also listed in [reference.md](reference.md)
 - Explore the [**interactive key-concepts page**](https://su-ntu-ctp.github.io/6m-data-3.10-Transformers-Attention-GenAI/) after the videos (GitHub Pages)
 - Run [notebooks/01_morning_briefing.ipynb](notebooks/01_morning_briefing.ipynb) — feel the power of pretrained pipelines
 
@@ -67,12 +67,11 @@ This is the lesson that connects classical ML to GenAI. By the end of the day yo
 | `reference.md`           | Glossary of 25 transformer/GenAI terms |
 | `environment.yml`        | Conda env spec |
 | `docs/index.html`        | Interactive key-concepts page — explore during pre-class (GitHub Pages) |
-| `mcq_assessment.md`      | Multiple-choice self-check quiz |
 | `notebooks/`             | 4 in-class NBs + assignment + extensions + data |
 
 ## Module 3 close
 
-This is the last lesson. After L10 you'll have built — across nine days — a complete toolkit:
+This is the last lesson. After L10 you'll have built — across ten days — a complete toolkit:
 
 - Classical ML (LR, trees, boosting, clustering, time series)
 - Deep learning (MLPs, CNNs, NLP transformers)

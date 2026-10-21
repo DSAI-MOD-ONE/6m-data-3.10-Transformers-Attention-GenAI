@@ -43,7 +43,7 @@ This is the lesson that connects classical ML to GenAI. By the end of the day yo
 - Concept recap with slides (~45–60 min): instructor recaps the key concepts — you already explored the [interactive key-concepts walkthrough](https://su-ntu-ctp.github.io/6m-data-3.10-Transformers-Attention-GenAI/) pre-class (revisit any time)
 - Short reference & review → [**lesson.md**](./lesson.md) (overview, key takeaways, RAG-design checklist, 8-question review, course-closing reflection)
 - Code-along notebooks (in order):
-  - [02_attention_intuition.ipynb](notebooks/02_attention_intuition.ipynb) — attention by hand
+  - [02_attention_intuition.ipynb](notebooks/02_attention_intuition.ipynb) — attention in plain English, then read straight out of a real model (`all-MiniLM-L6-v2`) (maths optional)
   - [03_using_an_llm.ipynb](notebooks/03_using_an_llm.ipynb) — tokenisation + generation
   - [04_rag_pipeline.ipynb](notebooks/04_rag_pipeline.ipynb) — retrieval-augmented generation
 

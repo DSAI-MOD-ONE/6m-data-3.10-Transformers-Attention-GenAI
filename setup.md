@@ -121,6 +121,8 @@ If you see `ModuleNotFoundError`, the wrong kernel is selected — go back to St
 
 **Kernel dies on `import torch` (macOS)** → Create the `.env` file from Step 5 and restart the kernel.
 
+**`RuntimeError: Failed to create function state object for: prefill_attention_mpp...`** → Your env has PyTorch 2.14+, which crashes on M1 Macs. Recreate the environment so it picks up the pinned version: `conda deactivate && conda env remove -n dsai-m3 && conda env create -f environment.yml`, then restart VS Code and reselect the `dsai-m3` kernel. (Don't downgrade in place with `conda install` — it can leave stale torchvision metadata behind, which breaks `from transformers import pipeline` with `TypeError: 'NoneType' object is not iterable`.)
+
 **Hugging Face download fails** → Check your network, then re-run the cell — downloads resume from the cache.
 
 ---

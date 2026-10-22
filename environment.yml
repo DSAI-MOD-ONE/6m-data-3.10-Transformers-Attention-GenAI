@@ -12,8 +12,10 @@ dependencies:
   - scikit-learn
   - scipy
   - statsmodels
-  - pytorch
-  - torchvision
+  # Pinned: torch 2.14 crashes M1 Macs on half-precision attention
+  # ("Failed to create function state object for: prefill_attention_mpp...").
+  - pytorch=2.12.0
+  - torchvision=0.27
   - jupyter
   - notebook
   - ipywidgets
